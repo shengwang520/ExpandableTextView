@@ -16,5 +16,9 @@
             <enum name="center" value="1" />
             <enum name="right" value="2" />
         </attr>
+        <attr name="expandCollapseTextVisible" format="enum">
+            <enum name="gone" value="0" />
+            <enum name="invisible" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

@@ -6,9 +6,12 @@ ExpandableTextView,实现文本可扩展效果
 * maven { url '<https://jitpack.io>' }
 
 ## Step 2. Add the dependency
-* api 'com.github.shengwang520:ExpandableTextView:1.0.01'
+* api 'com.github.shengwang520:ExpandableTextView:1.0.02'
 
 ## Changelog
+
+### Version:1.0.02
+* 新增展开按钮的显示配置
 
 ### Version:1.0.01
 * 首次发布

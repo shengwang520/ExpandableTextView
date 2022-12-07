@@ -34,6 +34,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
     private var mContentLineSpacingMultiplier = 0f
     private var mStateTextColor = 0
     private var mAnimating = false
+    private var mVisible = 0
 
     /* Listener for callback */
     private var mListener: OnExpandStateChangeListener? = null
@@ -112,7 +113,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
 
         // Setup with optimistic case
         // i.e. Everything fits. No button needed
-        mStateTv!!.visibility = GONE
+        mStateTv!!.visibility = if (mVisible == 0) GONE else INVISIBLE
         mTv!!.maxLines = Int.MAX_VALUE
 
         // Measure
@@ -184,6 +185,7 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         mExpandString = typedArray.getString(R.styleable.ExpandableTextView_expandText)
         mCollapsedString = typedArray.getString(R.styleable.ExpandableTextView_collapseText)
         mStateTextColor = typedArray.getColor(R.styleable.ExpandableTextView_expandCollapseTextColor, Color.BLACK)
+        mVisible = typedArray.getInt(R.styleable.ExpandableTextView_expandCollapseTextVisible, STATE_TV_VISIBLE_GONE)
         if (mExpandString == null) {
             mExpandString = context.getString(R.string.to_expand_hint)
         }
@@ -260,6 +262,11 @@ class ExpandableTextView : LinearLayout, View.OnClickListener {
         private const val STATE_TV_GRAVITY_LEFT = 0
         private const val STATE_TV_GRAVITY_CENTER = 1
         private const val STATE_TV_GRAVITY_RIGHT = 2
+
+        /* 状态按钮的隐藏方式 */
+        private const val STATE_TV_VISIBLE_GONE = 0
+        private const val STATE_TV_VISIBLE_INVISIBLE = 1
+
         private fun getRealTextViewHeight(textView: TextView): Int {
             val textHeight = textView.layout.getLineTop(textView.lineCount)
             val padding = textView.compoundPaddingTop + textView.compoundPaddingBottom
